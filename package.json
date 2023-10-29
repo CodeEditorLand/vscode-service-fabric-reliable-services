@@ -1,21 +1,9 @@
 {
   "name": "vscode-service-fabric-reliable-services",
   "displayName": "Service Fabric Reliable Services",
-  "description": "Service Fabric Reliable Services extension for VSCode",
   "version": "0.0.1",
-  "publisher": "ms-azuretools",
-  "icon": "media/service-fabric.png",
-  "engines": {
-    "vscode": "1.16.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/CodeEditorLand/CodeEditorLand.git"
-  },
-  "galleryBanner": {
-    "color": "#3c3c3c",
-    "theme": "dark"
-  },
+  "private": "false",
+  "description": "Service Fabric Reliable Services extension for VSCode",
   "categories": [
     "Azure"
   ],
@@ -23,18 +11,31 @@
     "Azure",
     "ServiceFabric"
   ],
-  "preview": true,
-  "activationEvents": [
-    "onCommand:vscode-sf.addSFService",
-    "onCommand:vscode-sf.buildApplication",
-    "onCommand:vscode-sf.cleanJavaApplication",
-    "onCommand:vscode-sf.createApplication",
-    "onCommand:vscode-sf.deployApplication",
-    "onCommand:vscode-sf.publishApplication",
-    "onCommand:vscode-sf.removeApplication",
-    "onCommand:vscode-sf.upgradeApplication"
-  ],
+  "homepage": "https://github.com/CodeEditorLand/CodeEditorLand#readme",
+  "bugs": {
+    "url": "https://github.com/CodeEditorLand/CodeEditorLand/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeEditorLand/CodeEditorLand.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Nikola Hristov",
+    "email": "nikola@nikolahristov.tech",
+    "url": "https://nikolahristov.tech"
+  },
+  "publisher": "playform",
+  "type": "module",
   "main": "./out/src/extension",
+  "scripts": {
+    "compile": "tsc -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "prepublishOnly": "TypeScriptESBuild Source/**/*.ts",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test",
+    "vscode:prepublish": "npm run compile",
+    "watch": "tsc -watch -p ./"
+  },
   "contributes": {
     "commands": [
       {
@@ -121,27 +122,16 @@
       ]
     }
   },
-  "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "test": "npm run compile && node ./node_modules/vscode/bin/test",
-    "prepublishOnly": "TypeScriptESBuild Source/**/*.ts"
-  },
-  "devDependencies": {
-    "@types/chai": "4.3.9",
-    "@types/mocha": "10.0.3",
-    "@types/node": "20.8.9",
-    "chai": "4.3.10",
-    "lodash": "4.17.21",
-    "mocha": "10.2.0",
-    "ts-node": "10.9.1",
-    "typescript": "5.2.2",
-    "vscode": "1.1.30",
-    "xml2js": "0.6.2",
-    "typescript-esbuild": "0.3.1"
-  },
+  "activationEvents": [
+    "onCommand:vscode-sf.addSFService",
+    "onCommand:vscode-sf.buildApplication",
+    "onCommand:vscode-sf.cleanJavaApplication",
+    "onCommand:vscode-sf.createApplication",
+    "onCommand:vscode-sf.deployApplication",
+    "onCommand:vscode-sf.publishApplication",
+    "onCommand:vscode-sf.removeApplication",
+    "onCommand:vscode-sf.upgradeApplication"
+  ],
   "dependencies": {
     "array-uniq": "3.0.0",
     "diff": "5.1.0",
@@ -158,19 +148,29 @@
     "strip-ansi": "7.1.0",
     "yeoman-environment": "4.0.0"
   },
-  "homepage": "https://github.com/CodeEditorLand/CodeEditorLand#readme",
-  "bugs": {
-    "url": "https://github.com/CodeEditorLand/CodeEditorLand/issues"
+  "devDependencies": {
+    "@types/chai": "4.3.9",
+    "@types/mocha": "10.0.3",
+    "@types/node": "20.8.9",
+    "chai": "4.3.10",
+    "lodash": "4.17.21",
+    "mocha": "10.2.0",
+    "ts-node": "10.9.1",
+    "typescript": "5.2.2",
+    "typescript-esbuild": "0.3.1",
+    "vscode": "1.1.30",
+    "xml2js": "0.6.2"
   },
-  "license": "MIT",
-  "type": "module",
-  "private": "false",
+  "engines": {
+    "vscode": "1.16.0"
+  },
   "publishConfig": {
     "access": "public"
   },
-  "author": {
-    "name": "Nikola Hristov",
-    "email": "nikola@nikolahristov.tech",
-    "url": "https://nikolahristov.tech"
-  }
+  "icon": "media/service-fabric.png",
+  "galleryBanner": {
+    "color": "#3c3c3c",
+    "theme": "dark"
+  },
+  "preview": true
 }
