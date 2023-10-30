@@ -11,8 +11,8 @@ interface INodeProcess {
 	getuid(): number;
 	nextTick: Function;
 }
-declare let process :INodeProcess;
+declare let process: INodeProcess;
 
-    _isWindows = (process.platform === 'win32');
-	_isMacintosh = (process.platform === 'darwin');
-    _isLinux = (process.platform === 'linux');
+_isWindows = process.platform === "win32";
+_isMacintosh = process.platform === "darwin";
+_isLinux = process.platform === "linux";
