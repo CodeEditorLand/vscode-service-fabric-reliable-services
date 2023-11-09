@@ -1,9 +1,8 @@
-import { window, QuickPickOptions } from 'vscode';
-import Prompt from './prompt';
-import EscapeException from '../utils/EscapeException';
+import { window, QuickPickOptions } from "vscode";
+import Prompt from "./prompt";
+import EscapeException from "../utils/EscapeException";
 
 export default class ExpandPrompt extends Prompt {
-
 	constructor(question: any) {
 		super(question);
 	}
@@ -15,11 +14,12 @@ export default class ExpandPrompt extends Prompt {
 		}, {});
 
 		const options: QuickPickOptions = {
-			placeHolder: this._question.message
+			placeHolder: this._question.message,
 		};
 
-		return window.showQuickPick(Object.keys(choices), options)
-			.then(result => {
+		return window
+			.showQuickPick(Object.keys(choices), options)
+			.then((result) => {
 				if (result === undefined) {
 					throw new EscapeException();
 				}

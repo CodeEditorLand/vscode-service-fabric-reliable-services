@@ -1,5 +1,4 @@
 abstract class Prompt {
-
 	protected _question: any;
 	protected _answers: any;
 
