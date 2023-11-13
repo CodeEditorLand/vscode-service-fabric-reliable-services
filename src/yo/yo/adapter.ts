@@ -1,25 +1,26 @@
-import * as util from "util";
-import { window, OutputChannel, ViewColumn } from "vscode";
-import PromptFactory from "../prompts/factory";
-import runAsync from "../utils/run-async";
-const logger = require("yeoman-environment/lib/util/log");
-const diff = require("diff");
-const isFn = require("is-fn");
+import * as util from 'util';
+import { window, OutputChannel, ViewColumn } from 'vscode';
+import PromptFactory from '../prompts/factory';
+import runAsync from '../utils/run-async';
+const logger = require('yeoman-environment/lib/util/log');
+const diff = require('diff');
+const isFn = require('is-fn');
 
 export default class CodeAdapter {
+
 	public log = logger();
 	private outChannel: OutputChannel;
-	private outBuffer: string = "";
+	private outBuffer: string = '';
 
 	constructor() {
 		let self = this;
 
-		this.outChannel = window.createOutputChannel("Yeoman");
+		this.outChannel = window.createOutputChannel('Yeoman');
 		this.outChannel.clear();
 		this.outChannel.show(true);
 
 		// TODO Do not overwrite these methods
-		console.error = console.log = function () {
+		console.error = console.log = function() {
 			const line = util.format.apply(util, arguments);
 
 			self.outBuffer += `${line}\n`;
@@ -27,7 +28,7 @@ export default class CodeAdapter {
 			return this;
 		};
 
-		this.log.write = function () {
+		this.log.write = function() {
 			const line = util.format.apply(util, arguments);
 
 			self.outBuffer += line;
@@ -38,7 +39,7 @@ export default class CodeAdapter {
 
 	public prompt(questions, callback) {
 		let answers = {};
-		callback = callback || function () {};
+		callback = callback || function() {};
 
 		const promise = questions.reduce((promise, question) => {
 			return promise
@@ -51,32 +52,23 @@ export default class CodeAdapter {
 
 					return question.when;
 				})
-				.then((askQuestion) => {
+				.then(askQuestion => {
 					if (askQuestion) {
-						const prompt = PromptFactory.createPrompt(
-							question,
-							answers
-						);
+						const prompt = PromptFactory.createPrompt(question, answers);
 
-						return prompt
-							.render()
-							.then(
-								(result) =>
-									(answers[question.name] = question.filter
-										? question.filter(result)
-										: result)
-							);
+						return prompt.render().then(result => answers[question.name] = question.filter ? question.filter(result) : result);
 					}
 				});
 		}, Promise.resolve());
 
-		return promise.then(() => {
-			this.outChannel.clear();
-			this.outChannel.append(this.outBuffer);
+		return promise
+			.then(() => {
+				this.outChannel.clear();
+				this.outChannel.append(this.outBuffer);
 
-			callback(answers);
-			return answers;
-		});
+				callback(answers);
+				return answers;
+			});
 	}
 
 	public diff(actual, expected) {
@@ -84,25 +76,22 @@ export default class CodeAdapter {
 
 		let result = diff.diffLines(actual, expected);
 
-		result.map((part) => {
-			let prefix = " ";
+		result.map(part => {
+			let prefix = ' ';
 
 			if (part.added === true) {
-				prefix = "+";
+				prefix = '+';
 			} else if (part.removed === true) {
-				prefix = "-";
+				prefix = '-';
 			}
 
-			part.value = part.value
-				.split("\n")
-				.map((line) => {
-					if (line.trim().length === 0) {
-						return line;
-					}
+			part.value = part.value.split('\n').map(line => {
+				if (line.trim().length === 0) {
+					return line;
+				}
 
-					return `${prefix}${line}`;
-				})
-				.join("\n");
+				return `${prefix}${line}`
+			}).join('\n');
 
 			this.outChannel.append(part.value);
 		});

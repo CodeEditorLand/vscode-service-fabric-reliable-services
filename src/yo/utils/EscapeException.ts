@@ -1,1 +1,1 @@
-export default require("error-ex")("EscapeException");
+export default require('error-ex')('EscapeException');
