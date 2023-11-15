@@ -32,7 +32,7 @@ namespace Service1
                 ServiceEventSource.Current.Message("Registering Service : {0}", "Service1");
 
                 ServiceRuntime.RegisterServiceAsync("Service1Type",
-                    context => new Service1(context)).GetAwaiter().GetResult();
+                    context => new Service1 (context)).GetAwaiter().GetResult();
 
                 ServiceEventSource.Current.Message("Registered Service : {0}", "Service1");
 
