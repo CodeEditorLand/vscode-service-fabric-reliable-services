@@ -131,7 +131,7 @@
 		"opn": "3.0.3",
 		"read-pkg-up": "1.0.1",
 		"run-async": "2.0.0",
-		"semver": "5.0.3",
+		"semver": "5.7.2",
 		"strip-ansi": "3.0.0",
 		"yeoman-environment": "2.10.3"
 	},
