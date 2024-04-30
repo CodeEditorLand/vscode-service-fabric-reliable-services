@@ -1,4 +1,0 @@
-
-Remove-ServiceFabricApplication fabric:/TestCSharpApplication 
-Unregister-ServiceFabricApplicationType TestCSharpApplicationType 1.0.0
-Remove-ServiceFabricApplicationPackage TestCSharpApplication
