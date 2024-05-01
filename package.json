@@ -1,32 +1,21 @@
 {
-	"name": "vscode-service-fabric-reliable-services",
-	"displayName": "Service Fabric Reliable Services",
-	"version": "0.0.1",
-	"private": false,
-	"description": "Service Fabric Reliable Services extension for VSCode",
-	"keywords": [
-		"land"
+	"activationEvents": [
+		"onCommand:vscode-sf.addSFService",
+		"onCommand:vscode-sf.buildApplication",
+		"onCommand:vscode-sf.cleanJavaApplication",
+		"onCommand:vscode-sf.createApplication",
+		"onCommand:vscode-sf.deployApplication",
+		"onCommand:vscode-sf.publishApplication",
+		"onCommand:vscode-sf.removeApplication",
+		"onCommand:vscode-sf.upgradeApplication"
 	],
-	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/LandServiceFabricReliableServices#readme",
-	"bugs": {
-		"url": "HTTPS://GitHub.Com/CodeEditorLand/LandServiceFabricReliableServices/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+HTTPS://github.com/CodeEditorLand/LandServiceFabricReliableServices.git"
-	},
-	"license": "SEE LICENSE IN LICENSE",
 	"author": {
-		"name": "🌆 — Land —",
 		"email": "Land@PlayForm.Cloud",
+		"name": "🌆 — Land —",
 		"url": "HTTPS://Land.PlayForm.Cloud"
 	},
-	"type": "module",
-	"main": "./out/src/extension",
-	"scripts": {
-		"Document": "Document 'Source/**/*.ts'",
-		"compile": "tsc -p ./",
-		"prepublishOnly": "Build 'Source/**/*.ts'"
+	"bugs": {
+		"url": "HTTPS://GitHub.Com/CodeEditorLand/LandServiceFabricReliableServices/issues"
 	},
 	"contributes": {
 		"commands": [
@@ -114,16 +103,6 @@
 			]
 		}
 	},
-	"activationEvents": [
-		"onCommand:vscode-sf.addSFService",
-		"onCommand:vscode-sf.buildApplication",
-		"onCommand:vscode-sf.cleanJavaApplication",
-		"onCommand:vscode-sf.createApplication",
-		"onCommand:vscode-sf.deployApplication",
-		"onCommand:vscode-sf.publishApplication",
-		"onCommand:vscode-sf.removeApplication",
-		"onCommand:vscode-sf.upgradeApplication"
-	],
 	"dependencies": {
 		"array-uniq": "3.0.0",
 		"diff": "5.2.0",
@@ -139,6 +118,7 @@
 		"semver": "7.6.0",
 		"strip-ansi": "7.1.0"
 	},
+	"description": "Service Fabric Reliable Services extension for VSCode",
 	"devDependencies": {
 		"@playform/build": "0.0.7",
 		"@playform/document": "0.0.6",
@@ -148,13 +128,33 @@
 		"lodash": "4.17.21",
 		"xml2js": "0.6.2"
 	},
-	"publishConfig": {
-		"access": "public"
-	},
-	"icon": "media/service-fabric.png",
+	"displayName": "Service Fabric Reliable Services",
 	"galleryBanner": {
 		"color": "#3c3c3c",
 		"theme": "dark"
 	},
-	"preview": true
+	"homepage": "HTTPS://GitHub.Com/CodeEditorLand/LandServiceFabricReliableServices#readme",
+	"icon": "media/service-fabric.png",
+	"keywords": [
+		"land"
+	],
+	"license": "SEE LICENSE IN LICENSE",
+	"main": "./out/src/extension",
+	"name": "vscode-service-fabric-reliable-services",
+	"preview": true,
+	"private": false,
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+HTTPS://github.com/CodeEditorLand/LandServiceFabricReliableServices.git"
+	},
+	"scripts": {
+		"Document": "Document 'Source/**/*.ts'",
+		"compile": "tsc -p ./",
+		"prepublishOnly": "Build 'Source/**/*.ts'"
+	},
+	"type": "module",
+	"version": "0.0.1"
 }
