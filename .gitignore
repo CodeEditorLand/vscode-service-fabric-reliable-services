@@ -54,10 +54,8 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
 
 # package-lock file since it just causes merge conflicts
-package-lock.json
 
 # Output
 out
