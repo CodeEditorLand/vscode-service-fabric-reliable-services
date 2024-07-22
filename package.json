@@ -122,7 +122,7 @@
 		"@types/node": "7.0.43",
 		"chai": "4.1.2",
 		"lodash": "4.17.11",
-		"xml2js": "0.4.19"
+		"xml2js": "0.5.0"
 	},
 	"icon": "media/service-fabric.png",
 	"galleryBanner": {
