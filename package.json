@@ -1,133 +1,159 @@
 {
-	"activationEvents": [
-		"onCommand:vscode-sf.addSFService",
-		"onCommand:vscode-sf.buildApplication",
-		"onCommand:vscode-sf.cleanJavaApplication",
-		"onCommand:vscode-sf.createApplication",
-		"onCommand:vscode-sf.deployApplication",
-		"onCommand:vscode-sf.publishApplication",
-		"onCommand:vscode-sf.removeApplication",
-		"onCommand:vscode-sf.upgradeApplication"
-	],
-	"contributes": {
-		"commands": [
-			{
-				"category": "Service Fabric",
-				"command": "vscode-sf.addSFService",
-				"title": "Add Service"
-			},
-			{
-				"category": "Service Fabric",
-				"command": "vscode-sf.deployApplication",
-				"title": "Deploy Application (Localhost)"
-			},
-			{
-				"category": "Service Fabric",
-				"command": "vscode-sf.publishApplication",
-				"title": "Publish Application"
-			},
-			{
-				"category": "Service Fabric",
-				"command": "vscode-sf.removeApplication",
-				"title": "Remove Application"
-			},
-			{
-				"category": "Service Fabric",
-				"command": "vscode-sf.buildApplication",
-				"title": "Build Application"
-			},
-			{
-				"category": "Service Fabric",
-				"command": "vscode-sf.cleanJavaApplication",
-				"title": "Clean Application"
-			},
-			{
-				"category": "Service Fabric",
-				"command": "vscode-sf.createApplication",
-				"title": "Create Application"
-			},
-			{
-				"category": "Service Fabric",
-				"command": "vscode-sf.upgradeApplication",
-				"title": "Upgrade Application"
-			}
-		],
-		"menus": {
-			"editor/context": [
-				{
-					"command": "vscode-sf.createApplication",
-					"group": "navigation"
-				},
-				{
-					"command": "vscode-sf.buildApplication",
-					"group": "navigation"
-				}
-			],
-			"explorer/context": [
-				{
-					"command": "vscode-sf.createApplication",
-					"group": "navigation"
-				},
-				{
-					"command": "vscode-sf.buildApplication",
-					"group": "navigation"
-				},
-				{
-					"command": "vscode-sf.cleanJavaApplication",
-					"group": "navigation"
-				},
-				{
-					"command": "vscode-sf.deployApplication",
-					"group": "navigation"
-				},
-				{
-					"command": "vscode-sf.publishApplication",
-					"group": "navigation"
-				},
-				{
-					"command": "vscode-sf.removeApplication",
-					"group": "navigation"
-				},
-				{
-					"command": "vscode-sf.upgradeApplication",
-					"group": "navigation"
-				}
-			]
-		}
-	},
-	"dependencies": {
-		"array-uniq": "^1.0.2",
-		"diff": "^3.5.0",
-		"elegant-spinner": "^1.0.1",
-		"error-ex": "^1.3.0",
-		"figures": "^1.4.0",
-		"firstline": "^1.3.0",
-		"fix-path": "^1.1.0",
-		"is-fn": "^1.0.0",
-		"opn": "^3.0.3",
-		"read-pkg-up": "^1.0.1",
-		"run-async": "^2.0.0",
-		"semver": "^5.0.3",
-		"strip-ansi": "^3.0.0"
-	},
-	"description": "Service Fabric Reliable Services extension for VSCode",
-	"devDependencies": {
-		"@types/chai": "^4.1.3",
-		"@types/node": "^7.0.43",
-		"chai": "^4.1.2",
-		"lodash": "^4.17.11",
-		"xml2js": "^0.4.19"
-	},
-	"displayName": "Service Fabric Reliable Services",
-	"galleryBanner": {
-		"color": "#3c3c3c",
-		"theme": "dark"
-	},
-	"icon": "media/service-fabric.png",
-	"main": "./out/src/extension",
-	"name": "vscode-service-fabric-reliable-services",
-	"preview": true,
-	"scripts": {
-		"compile": "tsc -p ./"
-	}
+    "name": "vscode-service-fabric-reliable-services",
+    "displayName": "Service Fabric Reliable Services",
+    "description": "Service Fabric Reliable Services extension for VSCode",
+    "version": "0.1.6",
+    "publisher": "ms-azuretools",
+    "icon": "media/service-fabric.png",
+    "engines": {
+        "vscode": "^1.16.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Microsoft/vscode-service-fabric-reliable-services"
+    },
+    "galleryBanner": {
+        "color": "#3c3c3c",
+        "theme": "dark"
+    },
+    "categories": [
+        "Azure"
+    ],
+    "keywords": [
+        "Azure",
+        "ServiceFabric"
+    ],
+    "preview": true,
+    "activationEvents": [
+        "onCommand:vscode-sf.addSFService",
+        "onCommand:vscode-sf.buildApplication",
+        "onCommand:vscode-sf.cleanJavaApplication",
+        "onCommand:vscode-sf.createApplication",
+        "onCommand:vscode-sf.deployApplication",
+        "onCommand:vscode-sf.publishApplication",
+        "onCommand:vscode-sf.removeApplication",
+        "onCommand:vscode-sf.upgradeApplication"
+    ],
+    "main": "./out/src/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "vscode-sf.addSFService",
+                "title": "Add Service",
+                "category": "Service Fabric"
+            },
+            {
+                "command": "vscode-sf.deployApplication",
+                "title": "Deploy Application (Localhost)",
+                "category": "Service Fabric"
+            },
+            {
+                "command": "vscode-sf.publishApplication",
+                "title": "Publish Application",
+                "category": "Service Fabric"
+            },
+            {
+                "command": "vscode-sf.removeApplication",
+                "title": "Remove Application",
+                "category": "Service Fabric"
+            },
+            {
+                "command": "vscode-sf.buildApplication",
+                "title": "Build Application",
+                "category": "Service Fabric"
+            },
+            {
+                "command": "vscode-sf.cleanJavaApplication",
+                "title": "Clean Application",
+                "category": "Service Fabric"
+            },
+            {
+                "command": "vscode-sf.createApplication",
+                "title": "Create Application",
+                "category": "Service Fabric"
+            },
+            {
+                "command": "vscode-sf.upgradeApplication",
+                "title": "Upgrade Application",
+                "category": "Service Fabric"
+            }
+        ],
+        "menus": {
+            "explorer/context": [
+                {
+                    "command": "vscode-sf.createApplication",
+                    "group": "navigation"
+                },
+                {
+                    "command": "vscode-sf.buildApplication",
+                    "group": "navigation"
+                },
+                {
+                    "command": "vscode-sf.cleanJavaApplication",
+                    "group": "navigation"
+                },
+                {
+                    "command": "vscode-sf.deployApplication",
+                    "group": "navigation"
+                },
+                {
+                    "command": "vscode-sf.publishApplication",
+                    "group": "navigation"
+                },
+                {
+                    "command": "vscode-sf.removeApplication",
+                    "group": "navigation"
+                },
+                {
+                    "command": "vscode-sf.upgradeApplication",
+                    "group": "navigation"
+                }
+            ],
+            "editor/context": [
+                {
+                    "command": "vscode-sf.createApplication",
+                    "group": "navigation"
+                },
+                {
+                    "command": "vscode-sf.buildApplication",
+                    "group": "navigation"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "@types/chai": "^4.1.3",
+        "@types/mocha": "^2.2.48",
+        "@types/node": "^7.0.43",
+        "chai": "^4.1.2",
+        "lodash": "^4.17.11",
+        "mocha": "^9.1.3",
+        "ts-node": "^6.0.3",
+        "typescript": "^3.5.1",
+        "vscode": "^1.1.30",
+        "xml2js": "^0.4.19"
+    },
+    "dependencies": {
+        "array-uniq": "^1.0.2",
+        "diff": "^3.5.0",
+        "elegant-spinner": "^1.0.1",
+        "error-ex": "^1.3.0",
+        "figures": "^1.4.0",
+        "firstline": "^1.3.0",
+        "fix-path": "^1.1.0",
+        "is-fn": "^1.0.0",
+        "opn": "^3.0.3",
+        "read-pkg-up": "^1.0.1",
+        "run-async": "^2.0.0",
+        "semver": "^5.0.3",
+        "strip-ansi": "^3.0.0",
+        "yeoman-environment": "2.10.3"
+    }
 }
