@@ -1,14 +1,11 @@
 {
-	"activationEvents": [
-		"onCommand:vscode-sf.addSFService",
-		"onCommand:vscode-sf.buildApplication",
-		"onCommand:vscode-sf.cleanJavaApplication",
-		"onCommand:vscode-sf.createApplication",
-		"onCommand:vscode-sf.deployApplication",
-		"onCommand:vscode-sf.publishApplication",
-		"onCommand:vscode-sf.removeApplication",
-		"onCommand:vscode-sf.upgradeApplication"
-	],
+	"name": "vscode-service-fabric-reliable-services",
+	"displayName": "Service Fabric Reliable Services",
+	"description": "Service Fabric Reliable Services extension for VSCode",
+	"main": "./out/src/extension",
+	"scripts": {
+		"compile": "tsc -p ./"
+	},
 	"contributes": {
 		"commands": [
 			{
@@ -95,6 +92,16 @@
 			]
 		}
 	},
+	"activationEvents": [
+		"onCommand:vscode-sf.addSFService",
+		"onCommand:vscode-sf.buildApplication",
+		"onCommand:vscode-sf.cleanJavaApplication",
+		"onCommand:vscode-sf.createApplication",
+		"onCommand:vscode-sf.deployApplication",
+		"onCommand:vscode-sf.publishApplication",
+		"onCommand:vscode-sf.removeApplication",
+		"onCommand:vscode-sf.upgradeApplication"
+	],
 	"dependencies": {
 		"array-uniq": "3.0.0",
 		"diff": "7.0.0",
@@ -110,7 +117,6 @@
 		"semver": "7.6.3",
 		"strip-ansi": "7.1.0"
 	},
-	"description": "Service Fabric Reliable Services extension for VSCode",
 	"devDependencies": {
 		"@types/chai": "5.0.0",
 		"@types/node": "22.7.3",
@@ -118,16 +124,10 @@
 		"lodash": "4.17.21",
 		"xml2js": "0.6.2"
 	},
-	"displayName": "Service Fabric Reliable Services",
+	"icon": "media/service-fabric.png",
 	"galleryBanner": {
 		"color": "#3c3c3c",
 		"theme": "dark"
 	},
-	"icon": "media/service-fabric.png",
-	"main": "./out/src/extension",
-	"name": "vscode-service-fabric-reliable-services",
-	"preview": true,
-	"scripts": {
-		"compile": "tsc -p ./"
-	}
+	"preview": true
 }
