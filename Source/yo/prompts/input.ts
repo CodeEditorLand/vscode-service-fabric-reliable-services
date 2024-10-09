@@ -1,25 +1,25 @@
-import { window, InputBoxOptions } from 'vscode';
-import Prompt from './prompt';
-import EscapeException from '../utils/EscapeException';
-import runAsync from '../utils/run-async';
+import { InputBoxOptions, window } from "vscode";
 
-const figures = require('figures');
+import EscapeException from "../utils/EscapeException";
+import runAsync from "../utils/run-async";
+import Prompt from "./prompt";
+
+const figures = require("figures");
 
 export default class InputPrompt extends Prompt {
-
 	protected _options: InputBoxOptions;
 
 	constructor(question: any, answers: any) {
 		super(question, answers);
 
 		this._options = {
-			prompt: this._question.message
+			prompt: this._question.message,
 		};
 	}
 
 	public render() {
 		return runAsync(this._question.default)(this._answers)
-			.then(placeHolder => {
+			.then((placeHolder) => {
 				if (placeHolder instanceof Error) {
 					placeHolder = placeHolder.message;
 					this._question.default = undefined;
@@ -29,25 +29,28 @@ export default class InputPrompt extends Prompt {
 
 				return window.showInputBox(this._options);
 			})
-			.then(result => {
+			.then((result) => {
 				if (result === undefined) {
 					throw new EscapeException();
 				}
 
-				if (result === '') {
-					result = this._options.placeHolder || '';
+				if (result === "") {
+					result = this._options.placeHolder || "";
 				}
 
-				return runAsync(this._question.validate)(result || '')
-					.then(valid => {
+				return runAsync(this._question.validate)(result || "").then(
+					(valid) => {
 						if (valid !== undefined && valid !== true) {
-							this._question.default = new Error(`${figures.warning} ${valid}`);
+							this._question.default = new Error(
+								`${figures.warning} ${valid}`,
+							);
 
 							return this.render();
 						}
 
 						return result;
-					});
+					},
+				);
 			});
 	}
 }
