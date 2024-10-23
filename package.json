@@ -113,7 +113,7 @@
 	"description": "Service Fabric Reliable Services extension for VSCode",
 	"devDependencies": {
 		"@types/chai": "5.0.0",
-		"@types/node": "22.7.7",
+		"@types/node": "22.7.9",
 		"chai": "5.1.1",
 		"lodash": "4.17.21",
 		"xml2js": "0.6.2"
