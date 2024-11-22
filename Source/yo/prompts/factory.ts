@@ -16,16 +16,22 @@ export default class PromptFactory {
 			case "string":
 			case "input":
 				return new InputPrompt(question, answers);
+
 			case "password":
 				return new PasswordPrompt(question, answers);
+
 			case "list":
 				return new ListPrompt(question);
+
 			case "confirm":
 				return new ConfirmPrompt(question);
+
 			case "checkbox":
 				return new CheckboxPrompt(question);
+
 			case "expand":
 				return new ExpandPrompt(question);
+
 			default:
 				throw new Error(
 					`Could not find a prompt for question type ${question.type}`,

@@ -21,11 +21,14 @@ export async function removeApplication() {
 
 async function connectToCluster() {
 	var fs = require("fs");
+
 	var clusterData;
+
 	var clusterInfo;
 
 	const cloudProfile: vscode.Uri[] =
 		await vscode.workspace.findFiles("**/Cloud.json");
+
 	const pathToCloudProfile = cloudProfile[0].fsPath.replace("/c:", "");
 
 	await fs.readFile(pathToCloudProfile, "utf8", function (err, data) {
@@ -34,6 +37,7 @@ async function connectToCluster() {
 		}
 		clusterData = JSON.parse(data);
 		clusterInfo = clusterData.ClusterConnectionParameters;
+
 		if (clusterInfo.ClientCert.length > 0) {
 			connectToSecureCluster(clusterInfo);
 		} else {
@@ -47,6 +51,7 @@ async function connectToCluster() {
 function connectToSecureCluster(clusterInfo) {
 	var terminal: vscode.Terminal =
 		vscode.window.createTerminal("ServiceFabric");
+
 	if (vars._isLinux || vars._isMacintosh) {
 		exec(
 			"sfctl cluster select --endpoint " +
@@ -64,6 +69,7 @@ function connectToSecureCluster(clusterInfo) {
 						"Could not connect to cluster.",
 					);
 					console.log(err);
+
 					return;
 				}
 			},
@@ -88,6 +94,7 @@ function connectToSecureCluster(clusterInfo) {
 async function connectToUnsecureCluster(clusterInfo) {
 	var terminal: vscode.Terminal =
 		vscode.window.createTerminal("ServiceFabric");
+
 	if (clusterInfo.ConnectionIPOrURL.length > 0) {
 		if (vars._isLinux || vars._isMacintosh) {
 			exec(
@@ -101,6 +108,7 @@ async function connectToUnsecureCluster(clusterInfo) {
 							"Could not connect to cluster.",
 						);
 						console.log(err);
+
 						return;
 					}
 				},
@@ -124,6 +132,7 @@ async function connectToUnsecureCluster(clusterInfo) {
 							"Could not connect to cluster.",
 						);
 						console.log(err);
+
 						return;
 					}
 				},
@@ -143,10 +152,12 @@ async function uninstallApplication(terminal: vscode.Terminal) {
 	uri = await vscode.workspace.findFiles(
 		"**/uninstall" + installScriptExtension,
 	);
+
 	if (uri.length < 1) {
 		vscode.window.showErrorMessage(
 			"An uninstall file was not found in the workspace",
 		);
+
 		return;
 	}
 	const relativeInstallPath = vscode.workspace.asRelativePath(uri[0]);

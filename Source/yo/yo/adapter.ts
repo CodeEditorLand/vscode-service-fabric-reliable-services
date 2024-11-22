@@ -5,7 +5,9 @@ import PromptFactory from "../prompts/factory";
 import runAsync from "../utils/run-async";
 
 const logger = require("yeoman-environment/lib/util/log");
+
 const diff = require("diff");
+
 const isFn = require("is-fn");
 
 export default class CodeAdapter {
@@ -26,6 +28,7 @@ export default class CodeAdapter {
 
 			self.outBuffer += `${line}\n`;
 			self.outChannel.appendLine(line);
+
 			return this;
 		};
 
@@ -34,6 +37,7 @@ export default class CodeAdapter {
 
 			self.outBuffer += line;
 			self.outChannel.append(line);
+
 			return this;
 		};
 	}
@@ -77,6 +81,7 @@ export default class CodeAdapter {
 			this.outChannel.append(this.outBuffer);
 
 			callback(answers);
+
 			return answers;
 		});
 	}

@@ -11,6 +11,7 @@ export default class ExpandPrompt extends Prompt {
 	public render() {
 		const choices = this._question.choices.reduce((result, choice) => {
 			result[choice.name] = choice.value;
+
 			return result;
 		}, {});
 

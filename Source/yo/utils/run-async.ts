@@ -1,6 +1,7 @@
 import { window } from "vscode";
 
 const runAsync = require("run-async");
+
 const isFn = require("is-fn");
 
 // Helper function that will show a progress bar while running a function async

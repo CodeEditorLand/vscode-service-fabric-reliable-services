@@ -22,6 +22,7 @@ export async function publishApplication() {
 async function deployToUnsecureCluster(clusterInfo) {
 	var terminal: vscode.Terminal =
 		vscode.window.createTerminal("ServiceFabric");
+
 	if (clusterInfo.ConnectionIPOrURL.length > 0) {
 		if (vars._isLinux || vars._isMacintosh) {
 			exec(
@@ -35,6 +36,7 @@ async function deployToUnsecureCluster(clusterInfo) {
 							"Could not connect to cluster.",
 						);
 						console.log(err);
+
 						return;
 					}
 				},
@@ -58,6 +60,7 @@ async function deployToUnsecureCluster(clusterInfo) {
 							"Could not connect to cluster.",
 						);
 						console.log(err);
+
 						return;
 					}
 				},
@@ -75,6 +78,7 @@ async function deployToUnsecureCluster(clusterInfo) {
 async function deployToSecureClusterCert(clusterInfo) {
 	var terminal: vscode.Terminal =
 		vscode.window.createTerminal("ServiceFabric");
+
 	if (vars._isLinux || vars._isMacintosh) {
 		exec(
 			"sfctl cluster select --endpoint " +
@@ -92,6 +96,7 @@ async function deployToSecureClusterCert(clusterInfo) {
 						"Could not connect to cluster.",
 					);
 					console.log(err);
+
 					return;
 				}
 			},
@@ -115,14 +120,17 @@ async function deployToSecureClusterCert(clusterInfo) {
 
 async function installApplication(terminal: vscode.Terminal) {
 	console.log("Install Application");
+
 	var uri: vscode.Uri[] = null;
 	uri = await vscode.workspace.findFiles(
 		"**/install" + installScriptExtension,
 	);
+
 	if (uri.length < 1) {
 		vscode.window.showErrorMessage(
 			"An install file was not found in the workspace",
 		);
+
 		return;
 	}
 	const relativeInstallPath = vscode.workspace.asRelativePath(uri[0]);
@@ -132,12 +140,15 @@ async function installApplication(terminal: vscode.Terminal) {
 
 async function readCloudProfile() {
 	var fs = require("fs");
+
 	const cloudProfile: vscode.Uri[] =
 		await vscode.workspace.findFiles("**/Cloud.json");
+
 	if (cloudProfile.length < 1) {
 		vscode.window.showErrorMessage(
 			"Could not find configuration file Cloud.json. Please ensure that the application package is built using the build command before executing publish.",
 		);
+
 		return;
 	}
 
@@ -147,7 +158,9 @@ async function readCloudProfile() {
 			throw err;
 		}
 		var clusterData = JSON.parse(data);
+
 		var clusterInfo = clusterData.ClusterConnectionParameters;
+
 		if (
 			clusterInfo.ClientCert.length > 0 ||
 			clusterInfo.ClientCertThumbprint.length > 0

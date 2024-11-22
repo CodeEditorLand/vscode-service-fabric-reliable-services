@@ -18,6 +18,7 @@ if (vars._isWindows) {
 export async function deployApplication() {
 	var terminal: vscode.Terminal =
 		vscode.window.createTerminal("ServiceFabric");
+
 	if (vars._isLinux || vars._isMacintosh) {
 		exec(
 			"sfctl cluster select --endpoint http://localhost:19080",
@@ -27,6 +28,7 @@ export async function deployApplication() {
 						"Could not connect to cluster.",
 					);
 					console.log(err);
+
 					return;
 				}
 			},
@@ -34,10 +36,12 @@ export async function deployApplication() {
 	} else if (vars._isWindows) {
 		var buildFiles: vscode.Uri[] =
 			await vscode.workspace.findFiles("**/build.gradle");
+
 		if (buildFiles.length > 1) {
 			vscode.window.showErrorMessage(
 				"Sorry! You cannot deploy Service Fabric Java application to Windows Cluster",
 			);
+
 			return;
 		}
 		terminal.show();
@@ -53,10 +57,12 @@ async function installApplication(terminal: vscode.Terminal) {
 	uri = await vscode.workspace.findFiles(
 		"**/install" + installScriptExtension,
 	);
+
 	if (uri.length < 1) {
 		vscode.window.showErrorMessage(
 			"An install file was not found in the workspace",
 		);
+
 		return;
 	}
 	const relativeInstallPath = vscode.workspace.asRelativePath(uri[0]);

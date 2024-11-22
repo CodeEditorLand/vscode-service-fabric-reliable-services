@@ -7,8 +7,11 @@ import EscapeException from "../utils/EscapeException";
 import createEnvironment from "./environment";
 
 const readPkgUp = require("read-pkg-up");
+
 const semver = require("semver");
+
 const elegantSpinner = require("elegant-spinner");
+
 const figures = require("figures");
 
 const frame = elegantSpinner();
@@ -40,15 +43,19 @@ export default class Yeoman {
 
 		list = list.map((key) => {
 			const item = generatorsMeta[key];
+
 			const name = key.split(":")[0];
 
 			const pkgPath = readPkgUp.sync({ cwd: item.resolved });
+
 			if (!pkgPath.pkg) {
 				return null;
 			}
 
 			const pkg = pkgPath.pkg;
+
 			const generatorVersion: any = pkg.dependencies["yeoman-generator"];
+
 			const generatorMeta: any = _.pick(
 				pkg,
 				"name",
@@ -67,6 +74,7 @@ export default class Yeoman {
 
 			// Indicator to verify official generators
 			generatorMeta.officialGenerator = false;
+
 			if (generatorMeta.repository && generatorMeta.repository.url) {
 				generatorMeta.officialGenerator =
 					generatorMeta.repository.url.indexOf("github.com/yeoman/") >
@@ -101,6 +109,7 @@ export default class Yeoman {
 		process.chdir(cwd);
 
 		const prefix = "generator-";
+
 		if (generator.indexOf(prefix) === 0) {
 			generator = generator.slice(prefix.length);
 		}
@@ -128,6 +137,7 @@ export default class Yeoman {
 											window.showErrorMessage(
 												err.message,
 											);
+
 											throw err;
 										}
 									})

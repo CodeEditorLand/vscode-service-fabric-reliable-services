@@ -6,6 +6,7 @@ import * as path from "path";
 import CodeAdapter from "./adapter";
 
 const yeoman = require("yeoman-environment");
+
 const uniq = require("array-uniq");
 
 const win32 = process.platform === "win32";
@@ -43,7 +44,9 @@ const getNpmPaths = function () {
 			.execSync("npm get userconfig", { encoding: "utf8" })
 			.toString()
 			.trim();
+
 		const content = fs.readFileSync(userconfig).toString("utf8");
+
 		const match = content.match(new RegExp(`prefix=(.*?)${EOL}`));
 
 		if (match) {

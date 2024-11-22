@@ -17,7 +17,9 @@ if (vars._isWindows) {
 
 export async function upgradeApplication() {
 	var version = await readVersionFromManifest();
+
 	var clusterInfo = await readCloudProfile();
+
 	if (
 		clusterInfo.ClientCert.length > 0 ||
 		clusterInfo.ClientCertThumbprint.length > 0
@@ -31,6 +33,7 @@ export async function upgradeApplication() {
 async function deployToUnsecureCluster(clusterInfo, version) {
 	var terminal: vscode.Terminal =
 		vscode.window.createTerminal("ServiceFabric");
+
 	if (clusterInfo.ConnectionIPOrURL.length > 0) {
 		if (vars._isLinux || vars._isMacintosh) {
 			exec(
@@ -44,6 +47,7 @@ async function deployToUnsecureCluster(clusterInfo, version) {
 							"Could not connect to cluster.",
 						);
 						console.log(err);
+
 						return;
 					}
 				},
@@ -67,6 +71,7 @@ async function deployToUnsecureCluster(clusterInfo, version) {
 							"Could not connect to cluster.",
 						);
 						console.log(err);
+
 						return;
 					}
 				},
@@ -84,6 +89,7 @@ async function deployToUnsecureCluster(clusterInfo, version) {
 async function deployToSecureClusterCert(clusterInfo, version) {
 	var terminal: vscode.Terminal =
 		vscode.window.createTerminal("ServiceFabric");
+
 	if (vars._isLinux || vars._isMacintosh) {
 		exec(
 			"sfctl cluster select --endpoint " +
@@ -101,6 +107,7 @@ async function deployToSecureClusterCert(clusterInfo, version) {
 						"Could not connect to cluster.",
 					);
 					console.log(err);
+
 					return;
 				}
 			},
@@ -124,14 +131,17 @@ async function deployToSecureClusterCert(clusterInfo, version) {
 
 async function installApplication(terminal: vscode.Terminal, version: string) {
 	console.log("Upgrade Application");
+
 	var uri: vscode.Uri[] = null;
 	uri = await vscode.workspace.findFiles(
 		"**/upgrade" + installScriptExtension,
 	);
+
 	if (uri.length < 1) {
 		vscode.window.showErrorMessage(
 			"An upgrade file was not found in the workspace",
 		);
+
 		return;
 	}
 	const relativeInstallPath = vscode.workspace.asRelativePath(uri[0]);
@@ -141,12 +151,17 @@ async function installApplication(terminal: vscode.Terminal, version: string) {
 
 async function readVersionFromManifest(): Promise<string> {
 	var fs = require("fs");
+
 	const cloudProfile: vscode.Uri[] = await vscode.workspace.findFiles(
 		"**/ApplicationManifest.xml",
 	);
+
 	const pathToCloudProfile = cloudProfile[0].fsPath.replace("/c:", "");
+
 	const manifest = fs.readFileSync(pathToCloudProfile).toString("utf8");
+
 	var manifestJs;
+
 	var parseString = require("xml2js").parseString;
 
 	parseString(manifest, function (err, result) {
@@ -155,17 +170,23 @@ async function readVersionFromManifest(): Promise<string> {
 
 	var version =
 		manifestJs["ApplicationManifest"]["$"]["ApplicationTypeVersion"];
+
 	return version;
 }
 
 async function readCloudProfile() {
 	var fs = require("fs");
+
 	const cloudProfile: vscode.Uri[] =
 		await vscode.workspace.findFiles("**/Cloud.json");
+
 	const pathToCloudProfile = cloudProfile[0].fsPath.replace("/c:", "");
+
 	const profile = fs.readFileSync(pathToCloudProfile).toString("utf8");
 
 	var clusterData = JSON.parse(profile);
+
 	var clusterInfo = clusterData.ClusterConnectionParameters;
+
 	return clusterInfo;
 }

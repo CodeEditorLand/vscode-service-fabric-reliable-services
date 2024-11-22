@@ -17,7 +17,9 @@ import runAsync from "./utils/run-async";
 import Yeoman from "./yo/yo";
 
 const fs = require("fs");
+
 const figures = require("figures");
+
 const opn = require("opn");
 
 async function getWorkingFolder() {
@@ -32,27 +34,35 @@ async function getWorkingFolder() {
 		return workspace.workspaceFolders[0].uri.fsPath;
 	}
 	const selectedWkFolder = (window as any).showWorkspaceFolderPick();
+
 	return selectedWkFolder ? selectedWkFolder.uri.fspath : undefined;
 }
 
 export async function generatorProject(addService) {
 	const cwd = await getWorkingFolder();
+
 	if (!cwd) {
 		window.showErrorMessage("Please open a workspace directory first.");
+
 		return;
 	}
 
 	const yo = new Yeoman({ cwd });
+
 	let main;
+
 	let sub;
 
 	const generator = await window.showQuickPick(list(yo));
+
 	if (generator === undefined) {
 		return;
 	}
 
 	main = generator.label;
+
 	let subGenerator: string;
+
 	if ((generator as any).subGenerators.length > 1 && addService) {
 		subGenerator = await runSubGenerators((generator as any).subGenerators);
 	} else {
@@ -66,11 +76,15 @@ export async function generatorProject(addService) {
 	sub = subGenerator;
 
 	var beforeYo = getAllDirs(cwd);
+
 	var afterYo;
+
 	try {
 		yo.run(`${main}:${sub}`, cwd).then((_p) => {
 			afterYo = getAllDirs(cwd);
+
 			var newApp = _.difference(afterYo, beforeYo);
+
 			if (newApp.length > 0) {
 				openFolder(newApp[0]);
 			}
@@ -99,7 +113,9 @@ function openFolder(folderPath: string) {
 
 function getAllDirs(folderPath: string) {
 	const fs = require("fs");
+
 	const path = require("path");
+
 	return fs
 		.readdirSync(folderPath)
 		.map((name) => path.join(folderPath, name))
@@ -108,6 +124,7 @@ function getAllDirs(folderPath: string) {
 
 function runSubGenerators(subGenerators: string[]) {
 	const app = `${figures.star} app`;
+
 	const index = subGenerators.indexOf("app");
 
 	if (index !== -1) {
