@@ -1,5 +1,7 @@
 export let _isWindows = false;
+
 export let _isMacintosh = false;
+
 export let _isLinux = false;
 
 export interface IProcessEnvironment {
