@@ -35,6 +35,7 @@ export default class CheckboxPrompt extends Prompt {
 		};
 
 		let quickPickOptions = Object.keys(choices);
+
 		quickPickOptions.push(figures.tick);
 
 		return window

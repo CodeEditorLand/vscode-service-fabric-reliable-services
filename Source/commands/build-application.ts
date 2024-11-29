@@ -10,9 +10,11 @@ var installScriptExtension;
 
 if (vars._isWindows) {
 	builScriptExtension = ".cmd";
+
 	installScriptExtension = ".ps1";
 } else {
 	builScriptExtension = ".sh";
+
 	installScriptExtension = ".sh";
 }
 
@@ -23,6 +25,7 @@ export async function buildApplication() {
 		await vscode.workspace.findFiles("**/build.gradle");
 
 	if (buildFiles.length < 1) languageType = "C#";
+
 	else languageType = "Java";
 
 	const uris: vscode.Uri[] =
@@ -57,12 +60,15 @@ export async function buildGradleApplication() {
 
 	const terminal: vscode.Terminal =
 		vscode.window.createTerminal("ServiceFabric");
+
 	terminal.sendText("gradle ");
+
 	terminal.show();
 }
 
 export async function buildCSharpApplication(showTerminal: boolean) {
 	var uris: vscode.Uri[] = null;
+
 	uris = await vscode.workspace.findFiles("**/build" + builScriptExtension);
 
 	if (uris.length < 1) {
@@ -72,7 +78,9 @@ export async function buildCSharpApplication(showTerminal: boolean) {
 
 		return 1;
 	}
+
 	const buildPath = uris[0].fsPath.replace("/c:", "");
+
 	replaceBuildPath(buildPath);
 
 	const relativeBuildPath = vscode.workspace.asRelativePath(uris[0]);
@@ -81,6 +89,7 @@ export async function buildCSharpApplication(showTerminal: boolean) {
 		vscode.window.createTerminal("ServiceFabric");
 
 	var commands = "./" + relativeBuildPath;
+
 	terminal.sendText(commands, true);
 
 	if (showTerminal) {
@@ -90,9 +99,11 @@ export async function buildCSharpApplication(showTerminal: boolean) {
 	} else {
 		//This is path for testing. To check whether the build command is successfully sent to terminal
 		terminal.show(true);
+
 		terminal.sendText("$? > TestCSharpApplication/out.out", true);
 
 		var fs = require("fs");
+
 		console.log(vscode.workspace.workspaceFolders[0].uri.fsPath);
 
 		var outpath =
@@ -106,6 +117,7 @@ export async function buildCSharpApplication(showTerminal: boolean) {
 				content = fs.readFileSync(outpath, "utf8");
 
 				if (content.includes("T")) resolve(0);
+
 				else reject(1);
 			}, 30000);
 		});
@@ -114,10 +126,12 @@ export async function buildCSharpApplication(showTerminal: boolean) {
 
 function replaceBuildPath(filePath) {
 	var fs = require("fs");
+
 	fs.readFile(filePath, "utf8", function (err, data) {
 		if (err) {
 			return console.log(err);
 		}
+
 		var result = data.replace(/\\/g, "/");
 
 		fs.writeFile(filePath, result, "utf8", function (err) {
@@ -143,6 +157,7 @@ async function createPublishProfile() {
 	var uri: vscode.Uri[] = null;
 
 	var buildPath;
+
 	uri = await vscode.workspace.findFiles(
 		"**/install" + installScriptExtension,
 	);
@@ -154,6 +169,7 @@ async function createPublishProfile() {
 
 		return;
 	}
+
 	buildPath = uri[0].fsPath
 		.replace("/c:", "")
 		.replace("install" + installScriptExtension, "");
@@ -161,12 +177,14 @@ async function createPublishProfile() {
 	console.log("Build Path: " + buildPath);
 
 	var fs = require("fs");
+
 	fs.writeFile(
 		buildPath + "Cloud.json",
 		publishParamsJson,
 		"utf8",
 		function (err) {
 			if (err) throw err;
+
 			console.log("Completed!");
 		},
 	);

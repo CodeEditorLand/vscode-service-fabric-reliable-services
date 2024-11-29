@@ -12,14 +12,18 @@ const isFn = require("is-fn");
 
 export default class CodeAdapter {
 	public log = logger();
+
 	private outChannel: OutputChannel;
+
 	private outBuffer: string = "";
 
 	constructor() {
 		let self = this;
 
 		this.outChannel = window.createOutputChannel("Yeoman");
+
 		this.outChannel.clear();
+
 		this.outChannel.show(true);
 
 		// TODO Do not overwrite these methods
@@ -27,6 +31,7 @@ export default class CodeAdapter {
 			const line = util.format.apply(util, arguments);
 
 			self.outBuffer += `${line}\n`;
+
 			self.outChannel.appendLine(line);
 
 			return this;
@@ -36,6 +41,7 @@ export default class CodeAdapter {
 			const line = util.format.apply(util, arguments);
 
 			self.outBuffer += line;
+
 			self.outChannel.append(line);
 
 			return this;
@@ -44,6 +50,7 @@ export default class CodeAdapter {
 
 	public prompt(questions, callback) {
 		let answers = {};
+
 		callback = callback || function () {};
 
 		const promise = questions.reduce((promise, question) => {
@@ -78,6 +85,7 @@ export default class CodeAdapter {
 
 		return promise.then(() => {
 			this.outChannel.clear();
+
 			this.outChannel.append(this.outBuffer);
 
 			callback(answers);

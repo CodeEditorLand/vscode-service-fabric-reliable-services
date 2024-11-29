@@ -63,9 +63,11 @@ const getNpmPaths = function () {
 
 export default function (args?: any[], opts?: any) {
 	args = args || [];
+
 	opts = opts || {};
 
 	let env = yeoman.createEnv(args, opts, new CodeAdapter());
+
 	env.getNpmPaths = getNpmPaths;
 
 	return env;

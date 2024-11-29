@@ -9,9 +9,11 @@ var installScriptExtension;
 
 if (vars._isWindows) {
 	builScriptExtension = ".cmd";
+
 	installScriptExtension = ".ps1";
 } else {
 	builScriptExtension = ".sh";
+
 	installScriptExtension = ".sh";
 }
 
@@ -27,6 +29,7 @@ export async function deployApplication() {
 					vscode.window.showErrorMessage(
 						"Could not connect to cluster.",
 					);
+
 					console.log(err);
 
 					return;
@@ -44,16 +47,20 @@ export async function deployApplication() {
 
 			return;
 		}
+
 		terminal.show();
+
 		terminal.sendText(
 			"Connect-ServiceFabricCluster -ConnectionEndpoint localhost:19000",
 		);
 	}
+
 	installApplication(terminal);
 }
 
 async function installApplication(terminal: vscode.Terminal) {
 	var uri: vscode.Uri[] = null;
+
 	uri = await vscode.workspace.findFiles(
 		"**/install" + installScriptExtension,
 	);
@@ -65,7 +72,10 @@ async function installApplication(terminal: vscode.Terminal) {
 
 		return;
 	}
+
 	const relativeInstallPath = vscode.workspace.asRelativePath(uri[0]);
+
 	terminal.sendText("./" + relativeInstallPath);
+
 	terminal.show();
 }

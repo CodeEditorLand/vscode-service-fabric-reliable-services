@@ -22,6 +22,7 @@ export default class InputPrompt extends Prompt {
 			.then((placeHolder) => {
 				if (placeHolder instanceof Error) {
 					placeHolder = placeHolder.message;
+
 					this._question.default = undefined;
 				}
 

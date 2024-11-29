@@ -9,9 +9,11 @@ var installScriptExtension;
 
 if (vars._isWindows) {
 	builScriptExtension = ".cmd";
+
 	installScriptExtension = ".ps1";
 } else {
 	builScriptExtension = ".sh";
+
 	installScriptExtension = ".sh";
 }
 
@@ -35,6 +37,7 @@ async function deployToUnsecureCluster(clusterInfo) {
 						vscode.window.showErrorMessage(
 							"Could not connect to cluster.",
 						);
+
 						console.log(err);
 
 						return;
@@ -48,6 +51,7 @@ async function deployToUnsecureCluster(clusterInfo) {
 					":" +
 					clusterInfo.ConnectionPort,
 			);
+
 			terminal.show();
 		}
 	} else {
@@ -59,6 +63,7 @@ async function deployToUnsecureCluster(clusterInfo) {
 						vscode.window.showErrorMessage(
 							"Could not connect to cluster.",
 						);
+
 						console.log(err);
 
 						return;
@@ -69,9 +74,11 @@ async function deployToUnsecureCluster(clusterInfo) {
 			terminal.sendText(
 				"Connect-ServiceFabricCluster -ConnectionEndpoint localhost:19000",
 			);
+
 			terminal.show();
 		}
 	}
+
 	installApplication(terminal);
 }
 
@@ -95,6 +102,7 @@ async function deployToSecureClusterCert(clusterInfo) {
 					vscode.window.showErrorMessage(
 						"Could not connect to cluster.",
 					);
+
 					console.log(err);
 
 					return;
@@ -103,6 +111,7 @@ async function deployToSecureClusterCert(clusterInfo) {
 		);
 	} else if (vars._isWindows) {
 		terminal.show();
+
 		terminal.sendText(
 			"Connect-ServiceFabricCluster -ConnectionEndPoint " +
 				clusterInfo.ConnectionIPOrURL +
@@ -115,6 +124,7 @@ async function deployToSecureClusterCert(clusterInfo) {
 				" -StoreLocation CurrentUser -StoreName My",
 		);
 	}
+
 	installApplication(terminal);
 }
 
@@ -122,6 +132,7 @@ async function installApplication(terminal: vscode.Terminal) {
 	console.log("Install Application");
 
 	var uri: vscode.Uri[] = null;
+
 	uri = await vscode.workspace.findFiles(
 		"**/install" + installScriptExtension,
 	);
@@ -133,8 +144,11 @@ async function installApplication(terminal: vscode.Terminal) {
 
 		return;
 	}
+
 	const relativeInstallPath = vscode.workspace.asRelativePath(uri[0]);
+
 	terminal.sendText("./" + relativeInstallPath);
+
 	terminal.show();
 }
 
@@ -153,10 +167,12 @@ async function readCloudProfile() {
 	}
 
 	const pathToCloudProfile = cloudProfile[0].fsPath.replace("/c:", "");
+
 	await fs.readFile(pathToCloudProfile, "utf8", function (err, data) {
 		if (err) {
 			throw err;
 		}
+
 		var clusterData = JSON.parse(data);
 
 		var clusterInfo = clusterData.ClusterConnectionParameters;

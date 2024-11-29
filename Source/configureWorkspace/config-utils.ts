@@ -8,7 +8,9 @@ export async function quickPickLanguage(): Promise<string> {
 	};
 
 	const items: string[] = [];
+
 	items.push("Java");
+
 	items.push("C#");
 
 	return vscode.window.showQuickPick(items, opt);
@@ -22,8 +24,11 @@ export async function quickPickServiceType(): Promise<string> {
 	};
 
 	const items: string[] = [];
+
 	items.push("Reliable Actor Service");
+
 	items.push("Reliable Stateless Service");
+
 	items.push("Reliable Stateful Service");
 
 	return vscode.window.showQuickPick(items, opt);

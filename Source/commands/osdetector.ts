@@ -9,9 +9,11 @@ export interface IProcessEnvironment {
 }
 interface INodeProcess {
 	platform: string;
+
 	env: IProcessEnvironment;
 
 	getuid(): number;
+
 	nextTick: Function;
 }
 declare let process: INodeProcess;

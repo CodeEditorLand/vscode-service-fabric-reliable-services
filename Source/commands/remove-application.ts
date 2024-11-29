@@ -9,9 +9,11 @@ var installScriptExtension;
 
 if (vars._isWindows) {
 	builScriptExtension = ".cmd";
+
 	installScriptExtension = ".ps1";
 } else {
 	builScriptExtension = ".sh";
+
 	installScriptExtension = ".sh";
 }
 
@@ -35,7 +37,9 @@ async function connectToCluster() {
 		if (err) {
 			throw err;
 		}
+
 		clusterData = JSON.parse(data);
+
 		clusterInfo = clusterData.ClusterConnectionParameters;
 
 		if (clusterInfo.ClientCert.length > 0) {
@@ -68,6 +72,7 @@ function connectToSecureCluster(clusterInfo) {
 					vscode.window.showErrorMessage(
 						"Could not connect to cluster.",
 					);
+
 					console.log(err);
 
 					return;
@@ -86,8 +91,10 @@ function connectToSecureCluster(clusterInfo) {
 				clusterInfo.ClientCertThumbprint +
 				" -StoreLocation CurrentUser -StoreName My",
 		);
+
 		terminal.show();
 	}
+
 	uninstallApplication(terminal);
 }
 
@@ -107,6 +114,7 @@ async function connectToUnsecureCluster(clusterInfo) {
 						vscode.window.showErrorMessage(
 							"Could not connect to cluster.",
 						);
+
 						console.log(err);
 
 						return;
@@ -120,6 +128,7 @@ async function connectToUnsecureCluster(clusterInfo) {
 					":" +
 					clusterInfo.ConnectionPort,
 			);
+
 			terminal.show();
 		}
 	} else {
@@ -131,6 +140,7 @@ async function connectToUnsecureCluster(clusterInfo) {
 						vscode.window.showErrorMessage(
 							"Could not connect to cluster.",
 						);
+
 						console.log(err);
 
 						return;
@@ -141,14 +151,17 @@ async function connectToUnsecureCluster(clusterInfo) {
 			terminal.sendText(
 				"Connect-ServiceFabricCluster -ConnectionEndPoint localhost:19000",
 			);
+
 			terminal.show();
 		}
 	}
+
 	uninstallApplication(terminal);
 }
 
 async function uninstallApplication(terminal: vscode.Terminal) {
 	var uri: vscode.Uri[] = null;
+
 	uri = await vscode.workspace.findFiles(
 		"**/uninstall" + installScriptExtension,
 	);
@@ -160,7 +173,10 @@ async function uninstallApplication(terminal: vscode.Terminal) {
 
 		return;
 	}
+
 	const relativeInstallPath = vscode.workspace.asRelativePath(uri[0]);
+
 	terminal.sendText("./" + relativeInstallPath);
+
 	terminal.show();
 }

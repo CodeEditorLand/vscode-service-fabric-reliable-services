@@ -33,6 +33,7 @@ async function getWorkingFolder() {
 	if (workspace.workspaceFolders.length === 1) {
 		return workspace.workspaceFolders[0].uri.fsPath;
 	}
+
 	const selectedWkFolder = (window as any).showWorkspaceFolderPick();
 
 	return selectedWkFolder ? selectedWkFolder.uri.fspath : undefined;
@@ -102,12 +103,14 @@ export async function generatorProject(addService) {
 				return `${sub} ${match[1]}?`;
 			}
 		}
+
 		window.showErrorMessage(err.message || err);
 	}
 }
 
 function openFolder(folderPath: string) {
 	let uri = Uri.file(folderPath);
+
 	commands.executeCommand("vscode.openFolder", uri);
 }
 
@@ -171,6 +174,7 @@ function list(yo: Yeoman): Promise<QuickPickItem[]> {
 
 					return;
 				}
+
 				const azureGenerators = generators.filter((generator) => {
 					return (
 						generator.label === "azuresfcsharp" ||
@@ -179,6 +183,7 @@ function list(yo: Yeoman): Promise<QuickPickItem[]> {
 						generator.label === "azuresfguest"
 					);
 				});
+
 				resolve(azureGenerators);
 			});
 		});

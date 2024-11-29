@@ -18,14 +18,20 @@ const frame = elegantSpinner();
 
 export default class Yeoman {
 	private _options: any;
+
 	private _env: any;
+
 	private _status: StatusBarItem;
+
 	private _interval: any;
 
 	public constructor(options?: any) {
 		this._options = options;
+
 		this._env = createEnvironment(undefined, options);
+
 		this._status = window.createStatusBarItem(StatusBarAlignment.Left);
+
 		this._interval;
 	}
 
@@ -143,9 +149,11 @@ export default class Yeoman {
 									})
 									.on("end", () => {
 										this.clearState();
+
 										console.log(
 											`${EOL}${figures.tick} done`,
 										);
+
 										resolve();
 									});
 							} catch (err) {
@@ -166,6 +174,7 @@ export default class Yeoman {
 		console.log(state);
 
 		this._status.show();
+
 		this._status.tooltip = state;
 
 		this._interval = setInterval(() => {
@@ -175,6 +184,7 @@ export default class Yeoman {
 
 	private clearState() {
 		clearInterval(this._interval);
+
 		this._status.dispose();
 	}
 

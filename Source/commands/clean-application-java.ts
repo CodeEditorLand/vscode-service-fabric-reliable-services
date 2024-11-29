@@ -13,6 +13,8 @@ export async function cleanJavaApplication() {
 
 	const terminal: vscode.Terminal =
 		vscode.window.createTerminal("Service Fabric");
+
 	terminal.sendText("gradle clean ");
+
 	terminal.show();
 }

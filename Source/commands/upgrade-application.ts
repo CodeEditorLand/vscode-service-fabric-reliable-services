@@ -9,9 +9,11 @@ var installScriptExtension;
 
 if (vars._isWindows) {
 	builScriptExtension = ".cmd";
+
 	installScriptExtension = ".ps1";
 } else {
 	builScriptExtension = ".sh";
+
 	installScriptExtension = ".sh";
 }
 
@@ -46,6 +48,7 @@ async function deployToUnsecureCluster(clusterInfo, version) {
 						vscode.window.showErrorMessage(
 							"Could not connect to cluster.",
 						);
+
 						console.log(err);
 
 						return;
@@ -59,6 +62,7 @@ async function deployToUnsecureCluster(clusterInfo, version) {
 					":" +
 					clusterInfo.ConnectionPort,
 			);
+
 			terminal.show();
 		}
 	} else {
@@ -70,6 +74,7 @@ async function deployToUnsecureCluster(clusterInfo, version) {
 						vscode.window.showErrorMessage(
 							"Could not connect to cluster.",
 						);
+
 						console.log(err);
 
 						return;
@@ -80,9 +85,11 @@ async function deployToUnsecureCluster(clusterInfo, version) {
 			terminal.sendText(
 				"Connect-ServiceFabricCluster -ConnectionEndpoint localhost:19000",
 			);
+
 			terminal.show();
 		}
 	}
+
 	installApplication(terminal, version);
 }
 
@@ -106,6 +113,7 @@ async function deployToSecureClusterCert(clusterInfo, version) {
 					vscode.window.showErrorMessage(
 						"Could not connect to cluster.",
 					);
+
 					console.log(err);
 
 					return;
@@ -114,6 +122,7 @@ async function deployToSecureClusterCert(clusterInfo, version) {
 		);
 	} else if (vars._isWindows) {
 		terminal.show();
+
 		terminal.sendText(
 			"Connect-ServiceFabricCluster -ConnectionEndPoint " +
 				clusterInfo.ConnectionIPOrURL +
@@ -126,6 +135,7 @@ async function deployToSecureClusterCert(clusterInfo, version) {
 				" -StoreLocation CurrentUser -StoreName My",
 		);
 	}
+
 	installApplication(terminal, version);
 }
 
@@ -133,6 +143,7 @@ async function installApplication(terminal: vscode.Terminal, version: string) {
 	console.log("Upgrade Application");
 
 	var uri: vscode.Uri[] = null;
+
 	uri = await vscode.workspace.findFiles(
 		"**/upgrade" + installScriptExtension,
 	);
@@ -144,8 +155,11 @@ async function installApplication(terminal: vscode.Terminal, version: string) {
 
 		return;
 	}
+
 	const relativeInstallPath = vscode.workspace.asRelativePath(uri[0]);
+
 	terminal.sendText("./" + relativeInstallPath + " -version " + version);
+
 	terminal.show();
 }
 
