@@ -125,7 +125,7 @@
 	},
 	"icon": "media/service-fabric.png",
 	"main": "./out/src/extension",
-	"name": "vscode-service-fabric-reliable-services",
+	"name": "@codeeditorland/service-fabric-reliable-services",
 	"preview": true,
 	"scripts": {
 		"compile": "tsc -p ./"
