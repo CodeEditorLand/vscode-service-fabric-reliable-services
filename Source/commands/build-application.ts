@@ -25,7 +25,6 @@ export async function buildApplication() {
 		await vscode.workspace.findFiles("**/build.gradle");
 
 	if (buildFiles.length < 1) languageType = "C#";
-
 	else languageType = "Java";
 
 	const uris: vscode.Uri[] =
@@ -117,7 +116,6 @@ export async function buildCSharpApplication(showTerminal: boolean) {
 				content = fs.readFileSync(outpath, "utf8");
 
 				if (content.includes("T")) resolve(0);
-
 				else reject(1);
 			}, 30000);
 		});
